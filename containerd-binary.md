@@ -89,10 +89,10 @@ CNI plugins enable networking between containers, which is essential for Kuberne
 sudo mkdir -p /opt/cni/bin
 
 # Download latest CNI plugins
-wget https://github.com/containernetworking/plugins/releases/latest/download/cni-plugins-linux-amd64-v1.1.1.tgz
+wget https://github.com/containernetworking/plugins/releases/download/v1.6.2/cni-plugins-linux-amd64-v1.6.2.tgz
 
 # Extract CNI plugins
-sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.1.1.tgz
+sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.6.2.tgz
 ```
 
 📌 *These plugins are required for container networking, especially in Kubernetes clusters.*
