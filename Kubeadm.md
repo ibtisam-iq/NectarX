@@ -12,6 +12,26 @@
 
 ---
 
+## 🚀 One Command to Set Up Your Kubernetes Control Plane!
+
+Tired of long, complicated setup processes? **Run your Kubernetes control plane effortlessly** with just **ONE** command! Sit back, grab a coffee ☕, and watch the magic unfold! ✨
+
+### ❓ Do you have an EC2 instance ready with the required security group ports open?
+
+Before running the command, ensure you have a **t2.medium Ubuntu EC2 instance** with the necessary ports open in your security group. See [here](https://kubernetes.io/docs/reference/networking/ports-and-protocols/) for the required ports.
+
+```bash
+curl -sL https://raw.githubusercontent.com/ibtisam-iq/SilverInit/main/K8s-Control-Plane-Init.sh | bash
+```
+
+💡 No hassle. No manual steps. Just pure automation!
+⚡ Get your K8s control plane up and running in minutes!
+👉 Run it now and witness Kubernetes initialization like never before! 🚀
+
+🌸 *A flower never competes with its neighbor. It just blooms. So, be like a flower that gives its fragrance even to the hand that crushes it*. 🌸
+
+---
+
 ## Get Started
 
 ### 🔹 Step 1: AWS EC2 Machines Setup
@@ -61,7 +81,7 @@ lsblk | grep swap       # Should not show any swap partitions
 **Edit fstab to persist swap disable even after reboot**
 
 ```bash
-sudo sed -i '/swap/d' /etc/fstab
+sudo sed -i '/\s\+swap\s\+/d' /etc/fstab
 ```
 OR
 
@@ -70,16 +90,18 @@ Open fstab in a text editor and either delete swap line or comment it out like:
 # UUID=6759eaaa-01cf-4c33-a802-6e7d1bb5bd83 none swap sw 0 0
 ```
 
-Explanation:
+#### Explanation:
+- `\s\+` → Matches **one or more whitespace characters**.
+- `swap` → Looks for the word **"swap"**.
+- `\s\+` → Ensures **"swap" is surrounded by whitespace**.
+- `/d` → **Deletes matching lines**.
 
-- `sudo` → Runs the command with superuser privileges (necessary to modify system files).
-- `sed -i '/swap/d' /etc/fstab` → Uses sed (stream editor) to:
-  - `-i` → Edit the file in-place (modifies the file directly).
-  - `'/swap/d'` → Delete (d) any line in /etc/fstab that contains the word "swap".
-- fstab → The file being modified.
-
-Purpose:
-This removes any swap entries from /etc/fstab, which prevents the system from mounting swap partitions or swap files on boot.
+#### Effect:
+- It **removes only lines where "swap" appears with spaces around it**, ensuring it targets properly formatted swap entries.
+- This leaves other lines in fstab unaffected.
+- This is a safe operation as it only removes lines that match the specified pattern.
+#### Purpose:
+- This removes any swap entries from `/etc/fstab`, which prevents the system from mounting swap partitions or swap files on boot.
 
 2️⃣ **Set Unique Hostnames**
 

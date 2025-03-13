@@ -103,7 +103,7 @@ wget https://github.com/containerd/containerd/releases/download/v${VERSION}/cont
 sha256sum -c containerd-${VERSION}-linux-amd64.tar.gz.sha256sum
 
 # Extract containerd into /usr/local
-sudo tar Cxzvf /usr/local containerd-${VERSION}-linux-amd64.tar.gz
+sudo tar -C /usr/local -xzvf containerd-${VERSION}-linux-amd64.tar.gz
 ```
 
 📌 *This installs containerd binaries in **`/usr/local/bin`**.*
@@ -116,9 +116,9 @@ sudo tar Cxzvf /usr/local containerd-${VERSION}-linux-amd64.tar.gz
 
 ```bash
 sudo systemctl status containerd
-systemctl show -p FragmentPath containerd
-ls /usr/lib/systemd/system/containerd.service # Default path if installed with Package manager
-ls /etc/systemd/system/containerd.service # If Manually installed (e.g., from binary or custom scripts).
+sudo systemctl show -p FragmentPath containerd
+sudo ls /usr/lib/systemd/system/containerd.service # Default path if installed with Package manager
+sudo ls /etc/systemd/system/containerd.service # If Manually installed (e.g., from binary or custom scripts).
 ```
 - If it doesn't exist, create it manually:
 
