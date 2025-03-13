@@ -185,7 +185,7 @@ Is script ke baad directly `sudo systemctl status kubelet` check karne ka koi fa
 
 ---
 
-### 🔹 Step 4: Install Container Runtime
+### 🔹 Step 4: Install Container Runtime (containerd) on All Nodes
 - To run containers in Pods, Kubernetes uses a container runtime.
 
 - By default, Kubernetes uses the Container Runtime Interface (CRI) to interface with your chosen container runtime.
@@ -197,7 +197,7 @@ Is script ke baad directly `sudo systemctl status kubelet` check karne ka koi fa
 
 ---
 
-### 🔹 Step 5: Setting up Kubernetes (after containerd is installed)
+### 🔹 Step 5: Setting up Kubernetes (after containerd is installed) on All Nodes
 Once `containerd` is running, Kubernetes requires additional networking configurations.
 
 ```bash
