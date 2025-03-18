@@ -181,8 +181,44 @@ sudo apt-mark hold kubelet kubeadm kubectl
 kubelet --version
 kubectl version --client
 ```
-Is script ke baad directly `sudo systemctl status kubelet` check karne ka koi faida nahi hoga, kyunki kubelet active nahi hoga jab tak container runtime (containerd) install aur configure nahi hota. ✅
+#### Step 3 Result
 
+```text
+ubuntu@ip-172-31-17-2:~$ sudo ls /etc/kubernetes/
+manifests
+
+ubuntu@ip-172-31-17-2:~$ sudo ls /etc/kubernetes/manifests/
+
+ubuntu@ip-172-31-17-2:~$ ls -lah /etc/kubernetes/
+ls -lah /var/lib/etcd
+
+total 12K
+drwxrwxr-x   3 root root 4.0K Mar 18 18:41 .
+drwxr-xr-x 114 root root 4.0K Mar 18 18:41 ..
+drwxrwxr-x   2 root root 4.0K Mar 18 18:41 manifests
+ls: cannot access '/var/lib/etcd': No such file or directory
+
+ubuntu@ip-172-31-17-2:~$ sudo systemctl status kubelet
+○ kubelet.service - kubelet: The Kubernetes Node Agent
+     Loaded: loaded (/usr/lib/systemd/system/kubelet.service; enabled; preset: enabled)
+    Drop-In: /usr/lib/systemd/system/kubelet.service.d
+             └─10-kubeadm.conf
+     Active: inactive (dead)
+       Docs: https://kubernetes.io/docs/
+
+ubuntu@ip-172-31-17-2:~$ sudo systemctl status containerd
+● containerd.service - containerd container runtime
+     Loaded: loaded (/usr/lib/systemd/system/containerd.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-03-18 18:41:53 UTC; 27min ago
+       Docs: https://containerd.io
+    Process: 5787 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
+   Main PID: 5788 (containerd)
+      Tasks: 8
+     Memory: 27.2M (peak: 36.7M)
+        CPU: 2.039s
+     CGroup: /system.slice/containerd.service
+             └─5788 /usr/bin/containerd
+```
 ---
 
 ### 🔹 Step 4: Install Container Runtime (containerd) on All Nodes
